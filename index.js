@@ -35,12 +35,24 @@ app.get('/api/courses/:id', (req, res) => {
 app.put('/api/courses/:id', (req, res) => {
   // console.log(req);
   const courseId = req.params.id;
-  if (!courseId) return res.status(400).send('The course ID is not found.');
   const course = courses.find((item) => item.id === parseInt(courseId));
+  if (!course) return res.status(400).send('The course ID is not found.');
+
   const { error } = validateCourse(req.body);
   console.log(error);
   if (error) return res.status(400).send(error.details[0].message);
+
   course.name = req.body.name;
+  res.send(course);
+});
+// Delete course by id
+app.delete('/api/courses/:id', (req, res) => {
+  const courseId = req.params.id;
+  const course = courses.find((item) => item.id === parseInt(courseId));
+  if (!course) return res.status(400).send('The course ID is not found.');
+
+  const courseIndex = courses.indexOf(course);
+  courses.splice(courseIndex, 1);
   res.send(course);
 });
 
