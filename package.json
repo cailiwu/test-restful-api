@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cailiwu/test-restful-api#readme",
   "dependencies": {
     "config": "^3.3.0",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "helmet": "^3.21.3",
     "joi": "^14.3.1",

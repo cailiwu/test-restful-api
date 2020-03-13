@@ -5,6 +5,9 @@ const logger = require('./logger');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const config = require('config');
+// see debug https://www.npmjs.com/package/debug
+const startDebug = require('debug')('app:start-up');
+const apiDebug = require('debug')('app:api');
 // Configuration
 console.log(`App name is ${config.get('name')}`);
 console.log(`Mail serve is ${config.get('mail.host')}`);
@@ -21,7 +24,7 @@ app.use(helmet());
 console.log(`ENV:${app.get('env')}`);
 if (app.get('env') === 'development') {
   app.use(morgan('tiny'));
-  console.log('Morgan enabled...');
+  startDebug('Morgan enabled...');
 }
 
 const courses = [
@@ -40,6 +43,7 @@ const courses = [
 ];
 // GET all courses
 app.get('/api/course', (req, res) => {
+  apiDebug(courses);
   res.send(courses);
 });
 // Get courses by id
