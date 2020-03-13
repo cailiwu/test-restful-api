@@ -4,7 +4,10 @@ const Joi = require('joi');
 const logger = require('./logger');
 const helmet = require('helmet');
 const morgan = require('morgan');
-
+const config = require('config');
+// Configuration
+console.log(`App name is ${config.get('name')}`);
+console.log(`Mail serve is ${config.get('mail.host')}`);
 const app = express();
 app.use(express.json()); // req.body
 // use body x-www-form-urlencoded
